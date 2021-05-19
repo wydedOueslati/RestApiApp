@@ -1,7 +1,7 @@
 const Taxi = require('../models/taxi');
 
 
-// get a list of "taxis" from the db
+// get a list of "taxis" near by from the db
 exports.getTaxiNearBy = async (req, res, next) => {
     Taxi.aggregate([
         {
@@ -19,6 +19,12 @@ exports.getTaxiNearBy = async (req, res, next) => {
 
 }
 
+// get All taxis
+exports.getAll = async (req, res, next) => {
+    Taxi.find().then(function(response){
+        res.send(response);
+    }).catch(next);
+}
 // add a new "taxi" to the db
 exports.addTaxi = async (req, res, next) => {
     Taxi.create(req.body).then(function(response){
